@@ -30,6 +30,7 @@ So to perform reordering properly and save velocities you should do the followin
   - the second system shouldn't have any periodic box -- just load your PDB and save **tmp.prmtop** and **new.inpcrd**
 
    You will need these two files for next steps: **new.prmtop** and **new.inpcrd**. The reason for double system generation is that `tleap` shifts origin of your input system when PBCs are applied -- this gives us the right topology but translated coordinates. You could manually find translation vector by comparing unchanged atom positions and re-translate new coordinates back but generation of the second system seems to be much easier.
+
 5. Run `rst_reorder.py` using **last.rst** and **new.inpcrd** as input files. Set tolerance for the detection of atom swapping (0.004 angstroms is pretty good). Save reordered system to **new.rst**
 6. ???????
 7. PROFIT! You can use now **new.prmtop** and **new.rst** as starting point for next MD runs. Atom positions and velocities are conserved but topology is regenerated so you should be fine.
