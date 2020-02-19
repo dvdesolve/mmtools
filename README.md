@@ -37,7 +37,7 @@ So to perform reordering properly and save velocities you should do the followin
 
 #### Usage
 ```
-./reorder.py [-h] old new tol
+./rst_reorder.py [-h] old new tol
 ```
 
 - `old` -- restart file for old topology
