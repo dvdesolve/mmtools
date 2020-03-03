@@ -3,18 +3,24 @@
 ### merge_chg.py v0.1.0
 ### Viktor Drobot, 2019
 ##
-## tool for easy merging of charges calculated on REDS charge derivation server into AMBER prep file
-## updated prep could be used for system preparation in tleap utility
+## Tool for easy merging of charges calculated on REDS charge derivation server
+## into AMBER prep file.
+## Updated prep could be used for system preparation in tleap utility.
 
+""" Main merge_chg script """
 import argparse
 import sys
 
 
 # parse command line arguments
-parser = argparse.ArgumentParser(description = "Merge charges from REDS output into AMBER prep file")
-parser.add_argument("mol2", help = "Output file from REDS job (in Sybyl mol2 format)")
-parser.add_argument("prep", help = "AMBER prep file")
-parser.add_argument("-O", help = "Overwrite source prep file, otherwise just print result on screen", action = "store_true")
+parser = argparse.ArgumentParser(description="Merge charges from REDS output into AMBER prep file")
+parser.add_argument("mol2",
+                    help="Output file from REDS job (in Sybyl mol2 format)")
+parser.add_argument("prep",
+                    help="AMBER prep file")
+parser.add_argument("-O",
+                    help="Overwrite source prep file, otherwise just print result on screen",
+                    action="store_true")
 cmdline_args = vars(parser.parse_args())
 
 f_mol2 = cmdline_args["mol2"]
@@ -39,7 +45,8 @@ a_idx = []
 for i in range(10, 10 + a_cnt):
     a_idx.append({"idx": i, "name": fs_prep[i].split()[1]})
 
-# atom entries in REDS mol2 start at line 11 too; atom name is at column 2 and atom charge is at column 9
+# atom entries in REDS mol2 start at line 11 too;
+# atom name is at column 2 and atom charge is at column 9
 for i in range(10, 10 + a_cnt):
     a_name = fs_mol2[i].split()[1]
     a_chg = fs_mol2[i].split()[8]
@@ -67,7 +74,7 @@ if out_ow:
         fh_out.writelines(fs_prep)
 else:
     for l in fs_prep:
-        print(l, end = '')
+        print(l, end='')
 
 
 sys.exit(0)
